@@ -1,14 +1,7 @@
-import os
-import time
-
 import cv2
 from cvzone.HandTrackingModule import HandDetector
-from pynput.keyboard import Key, Controller
+import keyboard
 
-# Keyboard Lib Setup
-keyboard = Controller()
-
-# Variables
 width, height = 1280, 720
 
 # Camera Setup
@@ -32,30 +25,31 @@ while True:
         # Gesture Left
         if fingers == [1, 1, 1, 1, 0]:
             print("Left")
-            keyboard.press(Key.left)
-            keyboard.release(Key.left)
-            time.sleep(1)
+            keyboard.press("left")
+            keyboard.release("left")
 
         # Gesture Right
-        if fingers == [0, 1, 1, 1, 1]:
+        elif fingers == [0, 1, 1, 1, 1]:
             print("Right")
-            keyboard.press(Key.right)
-            keyboard.release(Key.right)
-            time.sleep(1)
+            keyboard.press("right")
+            keyboard.release("right")
 
         # Gesture Up
-        if fingers == [0, 1, 1, 0, 0]:
+        elif fingers == [0, 1, 1, 0, 0]:
             print("Up")
-            keyboard.press(Key.up)
-            keyboard.release(Key.up)
+            keyboard.press("up")
+            keyboard.release("up")
 
         # Gesture Down
-        if fingers == [0, 0, 1, 1, 1]:
+        elif fingers == [0, 0, 1, 1, 1]:
             print("Down")
-            keyboard.press(Key.down)
-            keyboard.release(Key.down)
+            keyboard.press("down")
+            keyboard.release("down")
 
     cv2.imshow("Image", img)
     key = cv2.waitKey(1)
     if key == ord('q'):
         break
+
+cap.release()
+cv2.destroyAllWindows()
